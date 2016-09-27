@@ -15,24 +15,24 @@ namespace MarvelLibrary.Models
     public class ContentResponse
     {
         [JsonProperty("code")]
-        public int code { get; set; }
+        public int Code { get; set; }
 
         [JsonProperty("status")]
-        public string status { get; set; }
+        public string Status { get; set; }
 
         [JsonProperty("copyright")]
-        public string copyright { get; set; }
+        public string Copyright { get; set; }
 
         [JsonProperty("attributionText")]
-        public string attributionText { get; set; }
+        public string AttributionText { get; set; }
 
         [JsonProperty("attributionHTML")]
-        public string attributionHTML { get; set; }
+        public string AttributionHTML { get; set; }
 
         [JsonProperty("etag")]
-        public string etag { get; set; }
+        public string Etag { get; set; }
 
         [JsonProperty("data")]
-        public Data data { get; set; }
+        public Data Data { get; set; }
     }
 }

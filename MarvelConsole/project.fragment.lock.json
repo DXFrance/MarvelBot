@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "exports": {
+    "MarvelLibrary/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.6",
+      "compile": {
+        "bin/Debug/MarvelLibrary.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/MarvelLibrary.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/MarvelLibrary.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    }
+  }
+}

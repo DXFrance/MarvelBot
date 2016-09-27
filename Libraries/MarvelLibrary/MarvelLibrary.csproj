@@ -39,6 +39,7 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\HashHelper.cs" />
     <Compile Include="Helpers\UriTemplate.cs" />
     <Compile Include="IMarvelClient.cs" />
     <Compile Include="MarvelClient.cs" />

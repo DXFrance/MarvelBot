@@ -22,14 +22,16 @@ namespace MarvelLibrary
     public sealed class MarvelClient : SimpleServiceClient, IMarvelClient
     {
         private Uri _hostUri = new Uri("http://gateway.marvel.com");
-        private string _apiKey = string.Empty;
+        private string _publicKey = string.Empty;
+        private string _privateKey = string.Empty;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MarvelClient"/> class.
         /// </summary>
-        internal MarvelClient(string apiKey)
+        internal MarvelClient(string publicKey, string privateKey)
         {
-            _apiKey = apiKey;
+            _publicKey = publicKey;
+            _privateKey = privateKey;
         }
 
         /// <summary>
@@ -38,11 +40,16 @@ namespace MarvelLibrary
         /// <returns>A <see cref="ContentResponse"/> object.</returns>
         public async Task<ContentResponse> GetCharactersAsync(string name)
         {
-            var parameters = new Dictionary<string, string>();
-            parameters.Add("apikey", _apiKey);
-            parameters.Add("name", Uri.EscapeDataString(name));
+            var timestamp = DateTime.Now.Ticks.ToString();
+            var hash = timestamp + _privateKey + _publicKey;
 
-            var template = new UriTemplate("/v1/public/characters?nameStartsWith={name}&apikey={apikey}");
+            var parameters = new Dictionary<string, string>();
+            parameters.Add("apikey", _publicKey);
+            parameters.Add("timestamp", timestamp);
+            parameters.Add("name", Uri.EscapeDataString(name));
+            parameters.Add("hash", HashHelper.GetMd5Hash(hash));
+
+            var template = new UriTemplate("/v1/public/characters?ts={timestamp}&name={name}&apikey={apikey}&hash={hash}");
 
             return await GetWithRetryAsync<ContentResponse>(_hostUri, template, parameters);
         }

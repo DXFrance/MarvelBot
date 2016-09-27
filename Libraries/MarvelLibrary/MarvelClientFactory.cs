@@ -19,9 +19,9 @@ namespace MarvelLibrary
         /// Create The Marvel Platform client
         /// </summary>
         /// <returns>Marvel client core object.</returns>
-        public static IMarvelClient CreateMarvelClient(string apiKey)
+        public static IMarvelClient CreateMarvelClient(string publicKey, string privateKey)
         {
-            return new MarvelClient(apiKey);
+            return new MarvelClient(publicKey, privateKey);
         }
     }
 }
