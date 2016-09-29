@@ -9,6 +9,7 @@ using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
 using Microsoft.Bot.Builder.Dialogs;
 using SimpleMarvelBot.Dialogs;
+using System.Text.RegularExpressions;
 
 namespace SimpleMarvelBot
 {
@@ -27,7 +28,7 @@ namespace SimpleMarvelBot
             {
                 await Conversation.SendAsync(activity, () => new WelcomeDialog());
             }
-            else if (activity.Text.ToLower().Contains("tell me about a super hero"))
+            else
             {
                 await Conversation.SendAsync(activity, () => new SuperHeroInfoDialog());
             }
