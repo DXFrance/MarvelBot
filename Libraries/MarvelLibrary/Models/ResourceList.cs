@@ -12,15 +12,18 @@ namespace MarvelLibrary.Models
 {
     using Newtonsoft.Json;
 
-    public class Item
+    public class ResourceList
     {
-        [JsonProperty("resourceURI")]
-        public string ResourceURI { get; set; }
+        [JsonProperty("available")]
+        public int Available { get; set; }
 
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        [JsonProperty("collectionURI")]
+        public string CollectionURI { get; set; }
 
-        [JsonProperty("role")]
-        public string Role { get; set; }
+        [JsonProperty("items")]
+        public Item[] Items { get; set; }
+
+        [JsonProperty("returned")]
+        public int Returned { get; set; }
     }
 }

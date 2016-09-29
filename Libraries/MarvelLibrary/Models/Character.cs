@@ -13,7 +13,7 @@ namespace MarvelLibrary.Models
     using Newtonsoft.Json;
     using System;
 
-    public class Result
+    public class Character
     {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -28,22 +28,22 @@ namespace MarvelLibrary.Models
         public DateTime Modified { get; set; }
 
         [JsonProperty("thumbnail")]
-        public Thumbnail Thumbnail { get; set; }
+        public Image Thumbnail { get; set; }
 
         [JsonProperty("resourceURI")]
         public string ResourceURI { get; set; }
 
         [JsonProperty("comics")]
-        public Comics Comics { get; set; }
+        public ResourceList Comics { get; set; }
 
         [JsonProperty("series")]
-        public Series Series { get; set; }
+        public ResourceList Series { get; set; }
 
         [JsonProperty("stories")]
-        public Stories Stories { get; set; }
+        public ResourceList Stories { get; set; }
 
         [JsonProperty("events")]
-        public Events Events { get; set; }
+        public ResourceList Events { get; set; }
 
         [JsonProperty("urls")]
         public Url[] Urls { get; set; }

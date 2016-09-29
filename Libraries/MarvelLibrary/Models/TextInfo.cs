@@ -12,21 +12,15 @@ namespace MarvelLibrary.Models
 {
     using Newtonsoft.Json;
 
-    public class Data
+    public class TextInfo
     {
-        [JsonProperty("offset")]
-        public int Offset { get; set; }
+        [JsonProperty("type")]
+        public string Type { get; set; }
 
-        [JsonProperty("limit")]
-        public int Limit { get; set; }
+        [JsonProperty("language")]
+        public string Language { get; set; }
 
-        [JsonProperty("total")]
-        public int Total { get; set; }
-
-        [JsonProperty("count")]
-        public int Count { get; set; }
-
-        [JsonProperty("results")]
-        public Result[] Results { get; set; }
+        [JsonProperty("text")]
+        public string Text { get; set; }
     }
 }

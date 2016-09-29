@@ -37,8 +37,8 @@ namespace MarvelLibrary
         /// <summary>
         /// Fetches lists of comic characters
         /// </summary>
-        /// <returns>A <see cref="ContentResponse"/> object.</returns>
-        public async Task<ContentResponse> GetCharactersAsync(string name)
+        /// <returns>A <see cref="CharactersResponse"/> object.</returns>
+        public async Task<CharactersResponse> GetCharactersAsync(string name)
         {
             var timestamp = DateTime.Now.Ticks.ToString();
             var hash = timestamp + _privateKey + _publicKey;
@@ -51,7 +51,29 @@ namespace MarvelLibrary
 
             var template = new UriTemplate("/v1/public/characters?ts={timestamp}&name={name}&apikey={apikey}&hash={hash}");
 
-            return await GetWithRetryAsync<ContentResponse>(_hostUri, template, parameters);
+            return await GetWithRetryAsync<CharactersResponse>(_hostUri, template, parameters);
+        }
+
+        /// <summary>
+        /// Fetches lists of comics 
+        /// </summary>
+        /// <returns>A <see cref="ComicsResponse"/> object.</returns>
+        public async Task<ComicsResponse> GetComicsAsync(DateTime startDate, DateTime endDate)
+        {
+            var timestamp = DateTime.Now.Ticks.ToString();
+            var hash = timestamp + _privateKey + _publicKey;
+
+            var parameters = new Dictionary<string, string>();
+            parameters.Add("apikey", _publicKey);
+            parameters.Add("timestamp", timestamp);
+            parameters.Add("daterange", Uri.EscapeDataString($"{startDate.ToString("yyyy-MM-dd")},{endDate.ToString("yyyy-MM-dd")}"));
+            parameters.Add("hash", HashHelper.GetMd5Hash(hash));
+
+            //dateDescriptor = lastWeek
+            //var template = new UriTemplate("/v1/public/comics?ts={timestamp}&format=comic&formatType=comic&dateRange={daterange}&apikey={apikey}&hash={hash}");
+            var template = new UriTemplate("/v1/public/comics?ts={timestamp}&format=comic&formatType=comic&dateDescriptor=lastWeek&apikey={apikey}&hash={hash}");
+
+            return await GetWithRetryAsync<ComicsResponse>(_hostUri, template, parameters);
         }
     }
 }

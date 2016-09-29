@@ -12,18 +12,12 @@ namespace MarvelLibrary.Models
 {
     using Newtonsoft.Json;
 
-    public class Comics
+    public class Image
     {
-        [JsonProperty("available")]
-        public int Available { get; set; }
+        [JsonProperty("path")]
+        public string Path { get; set; }
 
-        [JsonProperty("collectionURI")]
-        public string CollectionURI { get; set; }
-
-        [JsonProperty("items")]
-        public Item[] Items { get; set; }
-
-        [JsonProperty("returned")]
-        public int Returned { get; set; }
+        [JsonProperty("extension")]
+        public string Extension { get; set; }
     }
 }

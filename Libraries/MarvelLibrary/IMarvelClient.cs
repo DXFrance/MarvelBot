@@ -11,6 +11,7 @@
 namespace MarvelLibrary
 {
     using Models;
+    using System;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -21,7 +22,13 @@ namespace MarvelLibrary
         /// <summary>
         /// Fetches lists of comic characters
         /// </summary>
-        /// <returns>A <see cref="ContentResponse"/> object.</returns>
-        Task<ContentResponse> GetCharactersAsync(string name);
+        /// <returns>A <see cref="CharactersResponse"/> object.</returns>
+        Task<CharactersResponse> GetCharactersAsync(string name);
+
+        /// <summary>
+        /// Fetches lists of comics 
+        /// </summary>
+        /// <returns>A <see cref="ComicsResponse"/> object.</returns>
+        Task<ComicsResponse> GetComicsAsync(DateTime startDate, DateTime endDate);
     }
 }

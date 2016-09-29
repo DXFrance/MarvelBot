@@ -12,18 +12,21 @@ namespace MarvelLibrary.Models
 {
     using Newtonsoft.Json;
 
-    public class Events
+    public class CharactersData
     {
-        [JsonProperty("available")]
-        public int Available { get; set; }
+        [JsonProperty("offset")]
+        public int Offset { get; set; }
 
-        [JsonProperty("collectionURI")]
-        public string CollectionURI { get; set; }
+        [JsonProperty("limit")]
+        public int Limit { get; set; }
 
-        [JsonProperty("items")]
-        public Item[] Items { get; set; }
+        [JsonProperty("total")]
+        public int Total { get; set; }
 
-        [JsonProperty("returned")]
-        public int Returned { get; set; }
+        [JsonProperty("count")]
+        public int Count { get; set; }
+
+        [JsonProperty("results")]
+        public Character[] Results { get; set; }
     }
 }
