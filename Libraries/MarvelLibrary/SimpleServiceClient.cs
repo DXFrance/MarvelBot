@@ -52,7 +52,6 @@ namespace MarvelLibrary
         {
             Uri uri = template.BindByName(baseUri, parameters);
             string jsonContent = string.Empty;
-            int xTotalCount = 0;
 
             T content = null;
 
