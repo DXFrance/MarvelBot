@@ -32,7 +32,7 @@ namespace SimpleMarvelBot.Dialogs
             var client = MarvelClientFactory.CreateMarvelClient("4304d8f80441726f68ce32b2819c3b91", "b8c5e4506efa790150a1a4d16920048159d16794");
             var hero = await client.GetCharactersAsync(heroName);
 
-            await context.PostAsync($"I found {hero.Data.Count} heroes.");
+            await context.PostAsync($"I found {hero.Data.Count} heroe(s).");
             
             context.Wait(MessageReceivedAsync);
         }
