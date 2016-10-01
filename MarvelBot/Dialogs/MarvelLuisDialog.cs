@@ -15,6 +15,20 @@ namespace MarvelBot.Dialogs
     [Serializable]
     public class MarvelLuisDialog : LuisDialog<object>
     {
+        [LuisIntent("Intent.Hello")]
+        public async Task Hello(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync("Hello, I am the **Marvel Bot**! You can get information about Marvel super heroes and comics. Try saying '*Do you know Daredevil?*'");
+            context.Wait(MessageReceived);
+        }
+
+        [LuisIntent("Intent.Help")]
+        public async Task Help(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync($"Here are some questions you can ask me: {Environment.NewLine}- *Do you know iron man?* {Environment.NewLine}- *do you have information about jessica jones ?* {Environment.NewLine}- *which comics were released between 12 july 2016 till 26 july 2016 ?* ");
+            context.Wait(MessageReceived);
+        }
+
         [LuisIntent("Intent.GetCharacterInfo")]
         public async Task GetCharacterInfo(IDialogContext context, LuisResult result)
         {
@@ -78,7 +92,7 @@ namespace MarvelBot.Dialogs
                     List<CardAction> cardButtons = new List<CardAction>();
                     CardAction plButton = new CardAction()
                     {
-                        Value = hero.Urls[0].Uri,
+                        Value = hero.Urls[0].Uri.Replace("http", "https"),
                         Type = "openUrl",
                         Title = "View more"
                     };
@@ -94,9 +108,9 @@ namespace MarvelBot.Dialogs
 
                     Attachment plAttachment = plCard.ToAttachment();
                     replyToConversation.Attachments.Add(plAttachment);
-
                     await context.PostAsync(replyToConversation);
                 }
+
             }
         }
 
@@ -111,14 +125,15 @@ namespace MarvelBot.Dialogs
             }
             else
             {
+                IMessageActivity replyToConversation = context.MakeMessage();
+                replyToConversation.Type = ActivityTypes.Message;
+                replyToConversation.Attachments = new List<Attachment>();
+                replyToConversation.AttachmentLayout = AttachmentLayoutTypes.Carousel;
+
                 foreach (var comic in comics.Data.Results)
                 {
                     if (string.IsNullOrEmpty(comic.Description))
                         continue;
-
-                    IMessageActivity replyToConversation = context.MakeMessage();
-                    replyToConversation.Type = ActivityTypes.Message;
-                    replyToConversation.Attachments = new List<Attachment>();
 
                     List<CardImage> cardImages = new List<CardImage>();
                     cardImages.Add(new CardImage(url: comic.Thumbnail.Path + "." + comic.Thumbnail.Extension));
@@ -126,7 +141,7 @@ namespace MarvelBot.Dialogs
                     List<CardAction> cardButtons = new List<CardAction>();
                     CardAction plButton = new CardAction()
                     {
-                        Value = comic.urls[0].Uri,
+                        Value = comic.urls[0].Uri.Replace("http", "https"),
                         Type = "openUrl",
                         Title = "View more"
                     };
@@ -142,9 +157,9 @@ namespace MarvelBot.Dialogs
 
                     Attachment plAttachment = plCard.ToAttachment();
                     replyToConversation.Attachments.Add(plAttachment);
-
-                    await context.PostAsync(replyToConversation);
                 }
+
+                await context.PostAsync(replyToConversation);
             }
         }
 
