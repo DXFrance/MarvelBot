@@ -1,0 +1,290 @@
+{
+  "luis_schema_version": "1.3.0",
+  "name": "MarvelBot",
+  "desc": "MarvelBot",
+  "culture": "en-us",
+  "intents": [
+    {
+      "name": "Intent.GetCharacterInfo"
+    },
+    {
+      "name": "Intent.GetCharactersList"
+    },
+    {
+      "name": "Intent.GetComics"
+    },
+    {
+      "name": "Intent.Hello"
+    },
+    {
+      "name": "Intent.Help"
+    },
+    {
+      "name": "None"
+    }
+  ],
+  "entities": [
+    {
+      "name": "Entity.Character"
+    },
+    {
+      "name": "Entity.Date",
+      "children": [
+        "StartDate",
+        "EndDate"
+      ]
+    }
+  ],
+  "composites": [],
+  "bing_entities": [
+    "ordinal"
+  ],
+  "actions": [],
+  "model_features": [],
+  "regex_features": [],
+  "utterances": [
+    {
+      "text": "which comics were released between 12 july 2016 till 26 july 2016 ?",
+      "intent": "Intent.GetComics",
+      "entities": [
+        {
+          "entity": "Entity.Date::StartDate",
+          "startPos": 5,
+          "endPos": 7
+        },
+        {
+          "entity": "Entity.Date::EndDate",
+          "startPos": 9,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "do you know jessica jones ?",
+      "intent": "Intent.GetCharacterInfo",
+      "entities": []
+    },
+    {
+      "text": "hello marvelbot",
+      "intent": "Intent.Hello",
+      "entities": []
+    },
+    {
+      "text": "i am lost",
+      "intent": "Intent.Help",
+      "entities": []
+    },
+    {
+      "text": "list of the comics from 12 july 2016 to 26 july 2017",
+      "intent": "Intent.GetComics",
+      "entities": [
+        {
+          "entity": "Entity.Date::StartDate",
+          "startPos": 5,
+          "endPos": 7
+        },
+        {
+          "entity": "Entity.Date::EndDate",
+          "startPos": 9,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "can you give me details about iron man ?",
+      "intent": "Intent.GetCharacterInfo",
+      "entities": [
+        {
+          "entity": "Entity.Character",
+          "startPos": 6,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "give me the list of the comics from 12 january 2016 till 13 january 2016",
+      "intent": "Intent.GetComics",
+      "entities": [
+        {
+          "entity": "Entity.Date::StartDate",
+          "startPos": 8,
+          "endPos": 10
+        },
+        {
+          "entity": "Entity.Date::EndDate",
+          "startPos": 12,
+          "endPos": 14
+        }
+      ]
+    },
+    {
+      "text": "help me",
+      "intent": "Intent.Help",
+      "entities": []
+    },
+    {
+      "text": "what about luke cage ?",
+      "intent": "Intent.GetCharacterInfo",
+      "entities": [
+        {
+          "entity": "Entity.Character",
+          "startPos": 2,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "can you assist me ?",
+      "intent": "Intent.Help",
+      "entities": []
+    },
+    {
+      "text": "i need really help",
+      "intent": "Intent.Help",
+      "entities": []
+    },
+    {
+      "text": "nothing really interesting to say",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "do you have information about jessica jones ?",
+      "intent": "Intent.GetCharacterInfo",
+      "entities": [
+        {
+          "entity": "Entity.Character",
+          "startPos": 5,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "hi",
+      "intent": "Intent.Hello",
+      "entities": []
+    },
+    {
+      "text": "i need to swim",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "hello",
+      "intent": "Intent.Hello",
+      "entities": []
+    },
+    {
+      "text": "i want details about daredevil",
+      "intent": "Intent.GetCharacterInfo",
+      "entities": [
+        {
+          "entity": "Entity.Character",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "can you give me details about luke cage ?",
+      "intent": "Intent.GetCharacterInfo",
+      "entities": [
+        {
+          "entity": "Entity.Character",
+          "startPos": 6,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "please provide me list of the comics released from 12 july 2016 to 30 july 2017",
+      "intent": "Intent.GetComics",
+      "entities": [
+        {
+          "entity": "Entity.Date::StartDate",
+          "startPos": 9,
+          "endPos": 11
+        },
+        {
+          "entity": "Entity.Date::EndDate",
+          "startPos": 13,
+          "endPos": 15
+        }
+      ]
+    },
+    {
+      "text": "help",
+      "intent": "Intent.Help",
+      "entities": []
+    },
+    {
+      "text": "do you have details about daredevil ?",
+      "intent": "Intent.GetCharacterInfo",
+      "entities": [
+        {
+          "entity": "Entity.Character",
+          "startPos": 5,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "can you give me details about daredevil ?",
+      "intent": "Intent.GetCharacterInfo",
+      "entities": [
+        {
+          "entity": "Entity.Character",
+          "startPos": 6,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "help me please",
+      "intent": "Intent.Help",
+      "entities": []
+    },
+    {
+      "text": "i need information about daredevil",
+      "intent": "Intent.GetCharacterInfo",
+      "entities": [
+        {
+          "entity": "Entity.Character",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "can you give me details about jessica jones ?",
+      "intent": "Intent.GetCharacterInfo",
+      "entities": [
+        {
+          "entity": "Entity.Character",
+          "startPos": 6,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "hey",
+      "intent": "Intent.Hello",
+      "entities": []
+    },
+    {
+      "text": "list of characters in the first one ?",
+      "intent": "Intent.GetCharactersList",
+      "entities": []
+    },
+    {
+      "text": "which characters in the second one ?",
+      "intent": "Intent.GetCharactersList",
+      "entities": []
+    },
+    {
+      "text": "i want the list of the characters in the second one",
+      "intent": "Intent.GetCharactersList",
+      "entities": []
+    }
+  ]
+}
