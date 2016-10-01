@@ -35,7 +35,7 @@ namespace SimpleMarvelBot
                     await Conversation.SendAsync(activity, () => new SuperHeroInfoDialog());
                 }
             }
-            if(activity.Type == ActivityTypes.ConversationUpdate || activity.MembersAdded.Count > 0)
+            else if(activity.Type == ActivityTypes.ConversationUpdate && activity.MembersAdded.Count > 0)
             {
                 var reply = activity.CreateReply("Say hello !");
                 await connector.Conversations.ReplyToActivityAsync(reply);
