@@ -23,14 +23,22 @@ namespace SimpleMarvelBot
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
             ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-
-            if (activity.Text.ToLower().Contains("hello") || activity.Text.ToLower().Contains("hi"))
+            if (activity.Type == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new WelcomeDialog());
+                if (activity.Text.ToLower().Contains("hello") || activity.Text.ToLower().Contains("hi"))
+                {
+                    var reply = activity.CreateReply($"Hello {activity.From.Name} ! I am the **Simple Marvel Bot**. You can ask me the detail of Marvel super heroes. For instance, you can say: '*I want to know about a hero*'.");
+                    await connector.Conversations.ReplyToActivityAsync(reply);
+                }
+                else
+                {
+                    await Conversation.SendAsync(activity, () => new SuperHeroInfoDialog());
+                }
             }
-            else
+            if(activity.Type == ActivityTypes.ConversationUpdate || activity.MembersAdded.Count > 0)
             {
-                await Conversation.SendAsync(activity, () => new SuperHeroInfoDialog());
+                var reply = activity.CreateReply("Say hello !");
+                await connector.Conversations.ReplyToActivityAsync(reply);
             }
 
             var response = Request.CreateResponse(HttpStatusCode.OK);

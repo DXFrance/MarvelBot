@@ -19,7 +19,7 @@ namespace SimpleMarvelBot.Dialogs
         public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
             var message = await argument;
-            await context.PostAsync("I did not understand what you said. To start you can say '*Hello*', for instance");
+            await context.PostAsync("Hello ! I am the **Simple Marvel Bot**. You can ask me the detail of Marvel super heroes. For instance, you can say: '*I want to know about a hero*'.");
             context.Wait(MessageReceivedAsync);
         }
     }
