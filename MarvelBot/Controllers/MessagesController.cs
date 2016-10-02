@@ -23,7 +23,17 @@ namespace MarvelBot
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                await Conversation.SendAsync(activity, () => new MarvelLuisDialog());
+                if (activity.Attachments.Count == 1)
+                {
+                    ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+                    var reply = await MarvelFaceRecognition.Identify(activity.Attachments[0].ContentUrl, activity);
+                    
+                    await connector.Conversations.SendToConversationAsync(reply);
+                }
+                else
+                {
+                    await Conversation.SendAsync(activity, () => new MarvelLuisDialog());
+                }
             }
             else
             {

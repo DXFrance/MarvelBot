@@ -120,6 +120,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Daredevil1.jpg" />
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
@@ -129,6 +130,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Dialogs\MarvelFaceRecognition.cs" />
     <Compile Include="Dialogs\MarvelLuisDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -146,6 +148,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Libraries\FaceLibrary\FaceLibrary.csproj">
+      <Project>{197B2538-E49A-48C5-802C-C34D0681FD41}</Project>
+      <Name>FaceLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libraries\MarvelLibrary\MarvelLibrary.csproj">
       <Project>{df0034e2-f0f2-42fc-a8f4-289ad4a38621}</Project>
       <Name>MarvelLibrary</Name>
