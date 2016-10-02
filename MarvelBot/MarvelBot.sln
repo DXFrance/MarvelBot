@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarvelLibrary", "..\Librari
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarvelConsole", "..\Tests\MarvelConsole\MarvelConsole.csproj", "{CA1DDE5E-0694-464D-B213-03C7818B727B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FaceLibrary", "..\Libraries\FaceLibrary\FaceLibrary.csproj", "{197B2538-E49A-48C5-802C-C34D0681FD41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,22 @@ Global
 		{CA1DDE5E-0694-464D-B213-03C7818B727B}.Release|x64.Build.0 = Release|Any CPU
 		{CA1DDE5E-0694-464D-B213-03C7818B727B}.Release|x86.ActiveCfg = Release|Any CPU
 		{CA1DDE5E-0694-464D-B213-03C7818B727B}.Release|x86.Build.0 = Release|Any CPU
+		{197B2538-E49A-48C5-802C-C34D0681FD41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{197B2538-E49A-48C5-802C-C34D0681FD41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{197B2538-E49A-48C5-802C-C34D0681FD41}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{197B2538-E49A-48C5-802C-C34D0681FD41}.Debug|ARM.Build.0 = Debug|Any CPU
+		{197B2538-E49A-48C5-802C-C34D0681FD41}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{197B2538-E49A-48C5-802C-C34D0681FD41}.Debug|x64.Build.0 = Debug|Any CPU
+		{197B2538-E49A-48C5-802C-C34D0681FD41}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{197B2538-E49A-48C5-802C-C34D0681FD41}.Debug|x86.Build.0 = Debug|Any CPU
+		{197B2538-E49A-48C5-802C-C34D0681FD41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{197B2538-E49A-48C5-802C-C34D0681FD41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{197B2538-E49A-48C5-802C-C34D0681FD41}.Release|ARM.ActiveCfg = Release|Any CPU
+		{197B2538-E49A-48C5-802C-C34D0681FD41}.Release|ARM.Build.0 = Release|Any CPU
+		{197B2538-E49A-48C5-802C-C34D0681FD41}.Release|x64.ActiveCfg = Release|Any CPU
+		{197B2538-E49A-48C5-802C-C34D0681FD41}.Release|x64.Build.0 = Release|Any CPU
+		{197B2538-E49A-48C5-802C-C34D0681FD41}.Release|x86.ActiveCfg = Release|Any CPU
+		{197B2538-E49A-48C5-802C-C34D0681FD41}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,5 +122,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{DF0034E2-F0F2-42FC-A8F4-289AD4A38621} = {34334B20-5E61-4DFE-8C68-27C01683AF75}
 		{CA1DDE5E-0694-464D-B213-03C7818B727B} = {D631BE5E-F273-4485-A836-59B3141454E0}
+		{197B2538-E49A-48C5-802C-C34D0681FD41} = {34334B20-5E61-4DFE-8C68-27C01683AF75}
 	EndGlobalSection
 EndGlobal

@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CA1DDE5E-0694-464D-B213-03C7818B727B}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{197B2538-E49A-48C5-802C-C34D0681FD41}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MarvelConsole</RootNamespace>
-    <AssemblyName>MarvelConsole</AssemblyName>
+    <RootNamespace>FaceLibrary</RootNamespace>
+    <AssemblyName>FaceLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -33,8 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\MarvelBot\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,36 +45,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Contract\AddPersistedFaceResult.cs" />
+    <Compile Include="Contract\Candidate.cs" />
+    <Compile Include="Contract\ClientError.cs" />
+    <Compile Include="Contract\CreatePersonResult.cs" />
+    <Compile Include="Contract\Face.cs" />
+    <Compile Include="Contract\FaceAttributes.cs" />
+    <Compile Include="Contract\FaceLandmarks.cs" />
+    <Compile Include="Contract\FaceList.cs" />
+    <Compile Include="Contract\FaceListMetadata.cs" />
+    <Compile Include="Contract\FaceMetadata.cs" />
+    <Compile Include="Contract\FaceRectangle.cs" />
+    <Compile Include="Contract\FacialHair.cs" />
+    <Compile Include="Contract\FeatureCoordinate.cs" />
+    <Compile Include="Contract\GlassesTypes.cs" />
+    <Compile Include="Contract\GroupResult.cs" />
+    <Compile Include="Contract\HeadPose.cs" />
+    <Compile Include="Contract\IdentifyResult.cs" />
+    <Compile Include="Contract\Person.cs" />
+    <Compile Include="Contract\PersonFace.cs" />
+    <Compile Include="Contract\PersonGroup.cs" />
+    <Compile Include="Contract\SimilarFace.cs" />
+    <Compile Include="Contract\SimilarPersistedFace.cs" />
+    <Compile Include="Contract\TrainingStatus.cs" />
+    <Compile Include="Contract\VerifyResult.cs" />
+    <Compile Include="FaceAPIException.cs" />
+    <Compile Include="FaceServiceClient.cs" />
+    <Compile Include="IFaceServiceClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Libraries\FaceLibrary\FaceLibrary.csproj">
-      <Project>{197b2538-e49a-48c5-802c-c34d0681fd41}</Project>
-      <Name>FaceLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Libraries\MarvelLibrary\MarvelLibrary.csproj">
-      <Project>{df0034e2-f0f2-42fc-a8f4-289ad4a38621}</Project>
-      <Name>MarvelLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Content Include="Assets\Daredevil\Daredevil3.jpg" />
-    <Content Include="Assets\Daredevil\Daredevil2.png" />
-    <Content Include="Assets\Daredevil\Daredevil1.jpg" />
-    <Content Include="Assets\Iron-Man\Iron-Man1.jpg" />
-    <Content Include="Assets\Iron-Man\Iron-Man2.png" />
-    <Content Include="Assets\Iron-Man\Iron-Man3.jpg" />
-    <Content Include="Assets\Iron-Man\Iron-Man4.jpg" />
-    <Content Include="Assets\Iron-Man\Iron-Man5.jpg" />
-    <Content Include="Assets\Thor\Thor1.jpg" />
-    <Content Include="Assets\Thor\Thor2.jpg" />
-    <Content Include="Assets\Thor\Thor3.jpg" />
-    <Content Include="Assets\Thor\Thor4.jpg" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
