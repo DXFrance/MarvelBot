@@ -7,6 +7,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
@@ -19,16 +21,12 @@ namespace MarvelBot.Dialogs
         {
             var subscriptionKey = "84bdb4c2391a4f3bb212d06570446ee4";
             var faceServiceClient = new FaceServiceClient(subscriptionKey);
-            var tempImageFolder = @"c:\images\totest.jpg";
+            var tempImageFolder = Path.Combine(Path.GetTempPath(), "totest.jpg");
 
             var personGroupId = "28d8a343-0790-4029-83e6-a0dfb39f5be5";
 
-            byte[] data;
-            using (WebClient client = new WebClient())
-            {
-                data = client.DownloadData(url);
-            }
-            File.WriteAllBytes(tempImageFolder, data);
+            var data = await GetAttachmentsAsByteArrayAsync(activity);
+            File.WriteAllBytes(tempImageFolder, data.First<byte[]>());
 
             Activity carouselActivity = activity.CreateReply();
             carouselActivity.Type = ActivityTypes.Message;
@@ -89,6 +87,40 @@ namespace MarvelBot.Dialogs
 
                 return carouselActivity;
             }
+        }
+
+        private static async Task<IEnumerable<byte[]>> GetAttachmentsAsByteArrayAsync(Activity activity)
+        {
+            var attachments = activity?.Attachments?
+            .Where(attachment => attachment.ContentUrl != null)
+            .Select(c => Tuple.Create(c.ContentType, c.ContentUrl));
+            if (attachments != null && attachments.Any())
+            {
+                var contentBytes = new List<byte[]>();
+                using (var connectorClient = new ConnectorClient(new Uri(activity.ServiceUrl)))
+                {
+                    var token = await (connectorClient.Credentials as MicrosoftAppCredentials).GetTokenAsync();
+                    foreach (var content in attachments)
+                    {
+                        var uri = new Uri(content.Item2);
+                        using (var httpClient = new HttpClient())
+                        {
+                            if (uri.Host.EndsWith("skype.com") && uri.Scheme == "https")
+                            {
+                                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/octet-stream"));
+                            }
+                            else
+                            {
+                                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(content.Item1));
+                            }
+                            contentBytes.Add(await httpClient.GetByteArrayAsync(uri));
+                        }
+                    }
+                }
+                return contentBytes;
+            }
+            return null;
         }
     }
 }

@@ -23,7 +23,7 @@ namespace MarvelBot
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                if (activity.Attachments.Count == 1)
+                if (activity.Attachments != null && activity.Attachments.Count == 1)
                 {
                     ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
                     var reply = await MarvelFaceRecognition.Identify(activity.Attachments[0].ContentUrl, activity);

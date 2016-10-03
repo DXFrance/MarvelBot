@@ -114,7 +114,6 @@ namespace MarvelBot.Dialogs
                     replyToConversation.Attachments.Add(plAttachment);
                     await context.PostAsync(replyToConversation);
                 }
-
             }
         }
 
@@ -134,6 +133,7 @@ namespace MarvelBot.Dialogs
                 replyToConversation.Attachments = new List<Attachment>();
                 replyToConversation.AttachmentLayout = AttachmentLayoutTypes.Carousel;
 
+                var count = 0;
                 foreach (var comic in comics.Data.Results)
                 {
                     if (string.IsNullOrEmpty(comic.Description))
@@ -161,6 +161,8 @@ namespace MarvelBot.Dialogs
 
                     Attachment plAttachment = plCard.ToAttachment();
                     replyToConversation.Attachments.Add(plAttachment);
+
+                    if (++count == 5) break;
                 }
 
                 await context.PostAsync(replyToConversation);

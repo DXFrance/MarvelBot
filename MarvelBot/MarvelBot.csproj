@@ -140,6 +140,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="MarvelBot.json" />
+    <None Include="Properties\PublishProfiles\marvelbot.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
