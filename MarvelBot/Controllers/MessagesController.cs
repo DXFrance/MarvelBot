@@ -27,7 +27,20 @@ namespace MarvelBot
                 {
                     ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
                     var reply = await MarvelFaceRecognition.Identify(activity.Attachments[0].ContentUrl, activity);
-                    
+
+                    if (activity.Attachments.Count > 0)
+                    {
+                        var firstReply = activity.CreateReply($"I found {reply.Attachments.Count} heroes in the picture.");
+                        await connector.Conversations.ReplyToActivityAsync(firstReply);
+                    }
+                    else
+                    {
+                        reply.Attachments = null;
+                        reply.AttachmentLayout = null;
+                        reply.Text = $"There are no heroes in the picture...";
+                    }
+
+
                     await connector.Conversations.SendToConversationAsync(reply);
                 }
                 else

@@ -38,42 +38,45 @@ namespace MarvelBot.Dialogs
                 try
                 {
                     var faces = await faceServiceClient.DetectAsync(fileStream);
-                    var identifyResult = await faceServiceClient.IdentifyAsync(personGroupId, faces.Select(ff => ff.FaceId).ToArray());
-                    var client = MarvelClientFactory.CreateMarvelClient("4304d8f80441726f68ce32b2819c3b91", "b8c5e4506efa790150a1a4d16920048159d16794");
-
-                    foreach (var result in identifyResult)
+                    if (faces.Length > 0)
                     {
-                        foreach (var candidate in result.Candidates)
+                        var identifyResult = await faceServiceClient.IdentifyAsync(personGroupId, faces.Select(ff => ff.FaceId).ToArray());
+                        var client = MarvelClientFactory.CreateMarvelClient("4304d8f80441726f68ce32b2819c3b91", "b8c5e4506efa790150a1a4d16920048159d16794");
+
+                        foreach (var result in identifyResult)
                         {
-                            var heroName = await faceServiceClient.GetPersonAsync(personGroupId, candidate.PersonId);
-
-                            //Create hero card
-                            var heroes = await client.GetCharactersAsync(heroName.Name);
-
-                            foreach (var hero in heroes.Data.Results)
+                            foreach (var candidate in result.Candidates)
                             {
-                                List<CardImage> cardImages = new List<CardImage>();
-                                cardImages.Add(new CardImage(url: hero.Thumbnail.Path + "." + hero.Thumbnail.Extension));
+                                var heroName = await faceServiceClient.GetPersonAsync(personGroupId, candidate.PersonId);
 
-                                List<CardAction> cardButtons = new List<CardAction>();
-                                CardAction plButton = new CardAction()
+                                //Create hero card
+                                var heroes = await client.GetCharactersAsync(heroName.Name);
+
+                                foreach (var hero in heroes.Data.Results)
                                 {
-                                    Value = hero.Urls[0].Uri.Replace("http", "https"),
-                                    Type = "openUrl",
-                                    Title = "View more"
-                                };
-                                cardButtons.Add(plButton);
+                                    List<CardImage> cardImages = new List<CardImage>();
+                                    cardImages.Add(new CardImage(url: hero.Thumbnail.Path + "." + hero.Thumbnail.Extension));
 
-                                HeroCard plCard = new HeroCard()
-                                {
-                                    Title = hero.Name,
-                                    Text = hero.Description,
-                                    Images = cardImages,
-                                    Buttons = cardButtons
-                                };
+                                    List<CardAction> cardButtons = new List<CardAction>();
+                                    CardAction plButton = new CardAction()
+                                    {
+                                        Value = hero.Urls[0].Uri.Replace("http", "https"),
+                                        Type = "openUrl",
+                                        Title = "View more"
+                                    };
+                                    cardButtons.Add(plButton);
 
-                                Attachment plAttachment = plCard.ToAttachment();
-                                carouselActivity.Attachments.Add(plAttachment);
+                                    HeroCard plCard = new HeroCard()
+                                    {
+                                        Title = hero.Name,
+                                        Text = hero.Description,
+                                        Images = cardImages,
+                                        Buttons = cardButtons
+                                    };
+
+                                    Attachment plAttachment = plCard.ToAttachment();
+                                    carouselActivity.Attachments.Add(plAttachment);
+                                }
                             }
                         }
                     }
@@ -82,9 +85,7 @@ namespace MarvelBot.Dialogs
                 {
                     Debug.WriteLine("Response: {0}. {1}", ex.ErrorCode, ex.ErrorMessage);
                 }
-
-                carouselActivity.Text = $"I found {carouselActivity.Attachments.Count} heroes in the picture.";
-
+                
                 return carouselActivity;
             }
         }
