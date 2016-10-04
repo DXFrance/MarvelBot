@@ -40,18 +40,71 @@ namespace MarvelLibrary
         /// <returns>A <see cref="CharactersResponse"/> object.</returns>
         public async Task<CharactersResponse> GetCharactersAsync(string name)
         {
-            var timestamp = DateTime.Now.Ticks.ToString();
-            var hash = timestamp + _privateKey + _publicKey;
+            if (name == "DaredeJism")
+            {
+                var character = new Character()
+                {
+                    Name = "DaredeJism",
+                    Thumbnail = new Image()
+                    {
+                        Extension = "jpg",
+                        Path = "http://marvelbot.azurewebsites.net/assets/daredejismc"
+                    },
+                    Description = "A super hero who has ability to freeze time while coding. He knows LUIS very well."
+                };
+                var listChar = new List<Character>();
+                listChar.Add(character);
 
-            var parameters = new Dictionary<string, string>();
-            parameters.Add("apikey", _publicKey);
-            parameters.Add("timestamp", timestamp);
-            parameters.Add("name", Uri.EscapeDataString(name));
-            parameters.Add("hash", HashHelper.GetMd5Hash(hash));
+                var characterResponse = new CharactersResponse()
+                {
+                    Data = new CharactersData()
+                    {
+                        Results = listChar.ToArray()
+                    }
+                };
 
-            var template = new UriTemplate("/v1/public/characters?ts={timestamp}&name={name}&apikey={apikey}&hash={hash}");
+                return characterResponse;
+            }
+            else if (name == "IronDude")
+            {
+                var character = new Character()
+                {
+                    Name = "Iron Dude",
+                    Thumbnail = new Image()
+                    {
+                        Extension = "jpg",
+                        Path = "http://marvelbot.azurewebsites.net/assets/irondudec"
+                    },
+                    Description = "The only SUPER HERO (who is deboiting poney in the space, and sending intergalatic buchettes)"
+                };
+                var listChar = new List<Character>();
+                listChar.Add(character);
 
-            return await GetWithRetryAsync<CharactersResponse>(_hostUri, template, parameters);
+                var characterResponse = new CharactersResponse()
+                {
+                    Data = new CharactersData()
+                    {
+                        Results = listChar.ToArray()
+                    }
+                };
+
+                return characterResponse;
+            }
+            else
+            { 
+                var timestamp = DateTime.Now.Ticks.ToString();
+                var hash = timestamp + _privateKey + _publicKey;
+
+                var parameters = new Dictionary<string, string>();
+                parameters.Add("apikey", _publicKey);
+                parameters.Add("timestamp", timestamp);
+                parameters.Add("name", Uri.EscapeDataString(name));
+                parameters.Add("hash", HashHelper.GetMd5Hash(hash));
+
+                var template = new UriTemplate("/v1/public/characters?ts={timestamp}&name={name}&apikey={apikey}&hash={hash}");
+
+                return await GetWithRetryAsync<CharactersResponse>(_hostUri, template, parameters);
+            }
         }
 
         /// <summary>

@@ -120,7 +120,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Daredevil1.jpg" />
+    <Content Include="Assets\daredejismc.jpg" />
+    <Content Include="Assets\irondudec.jpg" />
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">

@@ -94,13 +94,16 @@ namespace MarvelBot.Dialogs
                     cardImages.Add(new CardImage(url: hero.Thumbnail.Path + "." + hero.Thumbnail.Extension));
 
                     List<CardAction> cardButtons = new List<CardAction>();
-                    CardAction plButton = new CardAction()
+                    if (hero.Urls != null)
                     {
-                        Value = hero.Urls[0].Uri.Replace("http", "https"),
-                        Type = "openUrl",
-                        Title = "View more"
-                    };
-                    cardButtons.Add(plButton);
+                        CardAction plButton = new CardAction()
+                        {
+                            Value = hero.Urls[0].Uri.Replace("http", "https"),
+                            Type = "openUrl",
+                            Title = "View more"
+                        };
+                        cardButtons.Add(plButton);
+                    }
 
                     HeroCard plCard = new HeroCard()
                     {

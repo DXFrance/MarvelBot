@@ -28,7 +28,7 @@ namespace SimpleMarvelBot
                 if (activity.Text.ToLower().Contains("hello") || activity.Text.ToLower().Contains("hi"))
                 {
                     var reply = activity.CreateReply($"Hello {activity.From.Name} ! I am the **Simple Marvel Bot**. You can ask me the detail of Marvel super heroes. For instance, you can say: '*I want to know about a hero*'.");
-                    await connector.Conversations.ReplyToActivityAsync((Activity)reply);
+                    await connector.Conversations.ReplyToActivityAsync(reply);
                 }
                 else
                 {
