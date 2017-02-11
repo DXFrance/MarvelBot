@@ -40,7 +40,6 @@ namespace MarvelBot
                         reply.Text = $"There are no heroes in the picture...";
                     }
 
-
                     await connector.Conversations.SendToConversationAsync(reply);
                 }
                 else
